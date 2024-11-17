@@ -17,6 +17,6 @@ def test_refresh_jwt_token(api_client, refresh_token):
 
 def test_register(api_client, db):
     payload = {'name': 'test', 'email': 'test@test.com', 'password': '123@mudar'}
-    resp = api_client.post('/register/', data=payload)
+    resp = api_client.post('/api/register/', data=payload)
     assert resp.status_code == status.HTTP_201_CREATED
 
