@@ -2,6 +2,8 @@ import pytest
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 
+from customers.models import Customer
+
 
 @pytest.fixture
 def api_client():
@@ -14,6 +16,11 @@ def user(db):
     user = get_user_model().objects.create_user(email='test@test.com', password=pwd)
     user.clean_password = pwd  # monkey patch
     return user
+
+
+@pytest.fixture
+def customer(db):
+    return Customer.objects.create(name='foo bar', email='foo.bar@test.com')
 
 
 @pytest.fixture

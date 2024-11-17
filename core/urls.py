@@ -31,6 +31,8 @@ urlpatterns = [
     # OpenApi 3 schema generation
     path('api/docs/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/schema/ui', SpectacularSwaggerView.as_view(url_name='schema')),
+
+    path('api/', include('customers.urls'))
 ]
 
 if settings.DEBUG:

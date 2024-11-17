@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # apps
     'accounts',
+    'customers',
 
     # 3rd
     'rest_framework',
