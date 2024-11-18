@@ -1,0 +1,30 @@
+name: pipeline
+on: [ push, pull_request ]
+
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Copy repository files
+          uses: actions/checkout@v3
+
+        - name: Copy env file
+          run: |
+            cp contrib/env-sample .env
+
+        - name: Install Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.10'
+
+        - name: Install Poetry
+          run: pip
+
+            run: install poetry
+
+        - name: Install dependencies
+          run: poetry install
+
+        - name: Runs tests
+          run: poetry run pytest
