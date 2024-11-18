@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 
 from customers.models import Customer
+from products.models import Product
+from wishlist.models import WishList
 
 
 @pytest.fixture
@@ -21,6 +23,27 @@ def user(db):
 @pytest.fixture
 def customer(db):
     return Customer.objects.create(name='foo bar', email='foo.bar@test.com')
+
+
+@pytest.fixture
+def product(db):
+    return Product.objects.create(title='Tenis Runner',
+                                  brand='Nike',
+                                  price='899.55'
+                                  )
+
+
+@pytest.fixture
+def product2(db):
+    return Product.objects.create(title='Camisa Adidas flow',
+                                  brand='Adidas',
+                                  price='28.55'
+                                  )
+
+
+@pytest.fixture
+def wishlist(db, product, customer):
+    return WishList.objects.create(product=product, customer=customer)
 
 
 @pytest.fixture

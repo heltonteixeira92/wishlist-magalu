@@ -22,7 +22,7 @@ def test_read_customer(api_client, customer, token):
     headers = {'Authorization': f'Bearer {token}'}
     resp = api_client.get(f'/api/customers/{customer.id}/', headers=headers)
     assert resp.status_code == status.HTTP_200_OK
-    assert resp.json() == {'name': customer.name, 'email': customer.email}
+    assert resp.json() == {'name': customer.name, 'email': customer.email, 'wishlist': []}
 
 
 def test_read_nonexistent_customer(api_client, customer, token):
