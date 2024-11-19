@@ -16,10 +16,13 @@ Download the project and run it using docker
     # Cloning the Repository
     git clone https://github.com/heltonteixeira92/wishlist-magalu.git
     
+    # Go to Repository directory
     cd wishlist-magalu
     
+    # Coping .env to the project directory
     cp contrib/env-sample .env
     
+    # Running the project, attach -d to run in background
     docker compose up 
 
 
@@ -33,7 +36,7 @@ If you wish you can run the project without docker
     # Installing poetry
     pip install poetry
     
-    #  Creating virtualenv and Installing dependencies 
+    # Creating virtualenv and Installing dependencies 
     poetry install
     
     # Activating virtual environment
@@ -41,5 +44,53 @@ If you wish you can run the project without docker
     
     # Creating .env file, using windows just copy contrib/env-sample and past as .env
     cp contrib/env-sample .env
+    
+    # Change db variable settings with information from your local postgres
+    DATABASE_URL=postgres://postgres:postgres@localhost/postgres
 
 
+## Examples using the requests library
+
+Creating user for authentication
+```python
+import requests
+payload = {'name': 'Myuser', 'email': 'myuser@test.com', 'password': '123@mudar'}
+requests.post('http://localhost:8000/api/register/', data=payload)
+```
+
+Authenticating to obtain access token
+```python
+payload = {'email': 'myuser@test.com', 'password': '123@mudar'}
+resp = requests.post('http://localhost:8000/api/token/', data=payload)
+access_token = resp.json()['access']
+```
+
+Creating customer
+```python
+headers = {'Authorization': f'Bearer {access_token}'}
+payload = {'name': 'Matilde Cunha', 'email': 'matildecunha@test.com'}
+requests.post('http://localhost:8000/api/customers/', data=payload, headers=headers)
+```
+
+Creating product, to send image file add content_type='multipart/form-data'
+```python
+headers = {'Authorization': f'Bearer {access_token}'}
+payload = {'title': 'Televisão 48', 'brand': 'Samsung', 'price': 899.90}
+requests.post('http://localhost:8000/api/products/', data=payload, headers=headers)
+```
+
+Creating wishlist
+```python
+headers = {'Authorization': f'Bearer {access_token}'}
+payload = {'title': 'Televisão 48', 'brand': 'Samsung', 'price': 899.90}
+requests.post('http://localhost:8000/api/products/', data=payload, headers=headers)
+```
+
+Listing wishlist by customer
+```python
+headers = {'Authorization': f'Bearer {access_token}'}
+payload = {'product': 1, 'customer': 1}
+requests.post('http://localhost:8000/api/wishlists/', data=payload, headers=headers)
+```
+
+for more see the api schema: http://localhost:8000/api/docs/schema/ui

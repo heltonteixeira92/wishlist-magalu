@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
