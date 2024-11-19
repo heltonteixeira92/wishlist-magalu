@@ -42,7 +42,7 @@ If you wish you can run the project without docker
     # Activating virtual environment
     poetry shell
     
-    # Creating .env file, using windows just copy contrib/env-sample and past as .env
+    # Coping .env file, using windows just copy contrib/env-sample and past as .env
     cp contrib/env-sample .env
     
     # Change db variable settings with information from your local postgres
@@ -82,15 +82,14 @@ requests.post('http://localhost:8000/api/products/', data=payload, headers=heade
 Creating wishlist
 ```python
 headers = {'Authorization': f'Bearer {access_token}'}
-payload = {'title': 'Televisão 48', 'brand': 'Samsung', 'price': 899.90}
-requests.post('http://localhost:8000/api/products/', data=payload, headers=headers)
+payload = {'product': 1, 'customer': 1}
+requests.post('http://localhost:8000/api/wishlists/', data=payload, headers=headers)
 ```
 
 Listing wishlist by customer
 ```python
 headers = {'Authorization': f'Bearer {access_token}'}
-payload = {'product': 1, 'customer': 1}
-requests.post('http://localhost:8000/api/wishlists/', data=payload, headers=headers)
+requests.get('http://localhost:8000/api/wishlists/?customer=1', headers=headers)
 ```
 
 for more see the api schema: http://localhost:8000/api/docs/schema/ui
