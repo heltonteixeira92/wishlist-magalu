@@ -23,3 +23,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'name': {'required': True}
         }
+
+    def create(self, validated_data):
+        user = UserModel.objects.create(
+            name=validated_data['name'],
+            email=validated_data['email'],
+        )
+
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
