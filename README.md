@@ -48,6 +48,12 @@ If you wish you can run the project without docker
     # Change db variable settings with information from your local postgres
     DATABASE_URL=postgres://postgres:postgres@localhost/postgres
 
+    # Appling migrations
+    python manage.py migrate
+
+    # Running project
+    python manage.py runserver
+
 
 ## Examples using the requests library
 
