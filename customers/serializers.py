@@ -13,6 +13,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ['name', 'email', 'wishlist']
 
     def get_wishlist(self, object):  # noqa
-        products = WishList.objects.filter(customer=object.id).values_list('product')
-        wishlist = [product[0] for product in list(products)]
+        qty_product = WishList.objects.filter(customer=object.id).count()
+        wishlist = f'user has {qty_product} products on their wishlist'
         return wishlist
