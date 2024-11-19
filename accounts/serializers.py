@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'name': {'required': True}
         }
 
-    def create(self, validated_data):
+    def create(self, validated_data):  # noqa
         user = UserModel.objects.create(
             name=validated_data['name'],
             email=validated_data['email'],
